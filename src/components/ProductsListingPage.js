@@ -1,33 +1,58 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../redux/cartSlice';
+import './ProductsListingPage.css'; // Import the CSS file
 
-const ProductsListingPage = ({ addToCart }) => {
+const ProductsListingPage = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.items);
+
   const products = [
     {
       id: 1,
       name: 'Lavender',
-      description: 'Aromatic plant with calming properties.',
       price: 10,
       category: 'Aromatic Plants',
-      image: 'https://via.placeholder.com/150',
+      image: '/thumbnails/plant1.svg',
     },
     {
       id: 2,
       name: 'Peppermint',
-      description: 'Medicinal plant used for digestion.',
       price: 8,
       category: 'Medicinal Plants',
-      image: 'https://via.placeholder.com/150',
+      image: '/thumbnails/plant2.png',
     },
     {
       id: 3,
       name: 'Basil',
-      description: 'Aromatic herb perfect for cooking.',
       price: 6,
       category: 'Aromatic Plants',
-      image: 'https://via.placeholder.com/150',
+      image: '/thumbnails/plant1.svg',
+    },
+    {
+      id: 4,
+      name: 'Snake Plant',
+      price: 15,
+      category: 'Decorative Plants',
+      image: '/thumbnails/plant3.png',
+    },
+    {
+      id: 5,
+      name: 'Aloe Vera',
+      price: 12,
+      category: 'Medicinal Plants',
+      image: '/thumbnails/plant2.png',
+    },
+    {
+      id: 6,
+      name: 'Spider Plant',
+      price: 9,
+      category: 'Decorative Plants',
+      image: '/thumbnails/plant3.png',
     },
   ];
 
+  // Group products by category
   const groupedProducts = products.reduce((acc, product) => {
     if (!acc[product.category]) {
       acc[product.category] = [];
@@ -37,42 +62,23 @@ const ProductsListingPage = ({ addToCart }) => {
   }, {});
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h1>Our Plants</h1>
+    <div className="products-container">
       {Object.entries(groupedProducts).map(([category, items]) => (
-        <div key={category} style={{ marginBottom: '2rem' }}>
+        <div key={category} style={{ marginBottom: '2rem', width: '100%' }}>
           <h2>{category}</h2>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="products-container">
             {items.map((product) => (
-              <div
-                key={product.id}
-                style={{
-                  border: '1px solid #ccc',
-                  borderRadius: '5px',
-                  padding: '1rem',
-                  width: '200px',
-                }}
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  style={{ width: '100%', borderRadius: '5px' }}
-                />
+              <div key={product.id} className="product-card">
+                <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
-                <p>{product.description}</p>
                 <p>Price: ${product.price}</p>
                 <button
-                  onClick={() => addToCart(product)}
-                  style={{
-                    padding: '0.5rem',
-                    backgroundColor: '#4CAF50',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                  }}
+                  onClick={() => dispatch(addToCart(product))}
+                  disabled={cart.some((item) => item.id === product.id)}
                 >
-                  Add to Cart
+                  {cart.some((item) => item.id === product.id)
+                    ? 'Added to Cart'
+                    : 'Add to Cart'}
                 </button>
               </div>
             ))}
