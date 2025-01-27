@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import ProductsListingPage from './components/ProductsListingPage';
@@ -7,7 +7,7 @@ import ShopCartPage from './components/ShopCartPage';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/paradise-nursery">
       <Header />
       <Routes>
         <Route path="/" element={<LandingPage />} />

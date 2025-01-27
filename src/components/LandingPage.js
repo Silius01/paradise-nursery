@@ -1,12 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div
       className="landing-page"
       style={{
-        backgroundImage: "url('/background.jpg')",
+        backgroundImage: `url(${process.env.PUBLIC_URL}/background.jpg)`,
       }}
     >
       <h1>Paradise Nursery</h1>
@@ -22,7 +25,7 @@ const LandingPage = () => {
           with life and natural charm.
         </p>
       </div>
-      <button onClick={() => (window.location.href = '/products')}>Get Started</button>
+      <button onClick={() => navigate('/products')}>Get Started</button>
     </div>
   );
 };

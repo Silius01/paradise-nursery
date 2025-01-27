@@ -13,44 +13,46 @@ const ProductsListingPage = () => {
       name: 'Lavender',
       price: 10,
       category: 'Aromatic Plants',
-      image: '/thumbnails/plant1.svg',
+      image: `${process.env.PUBLIC_URL}/thumbnails/plant1.svg`,
     },
     {
       id: 2,
       name: 'Peppermint',
       price: 8,
       category: 'Medicinal Plants',
-      image: '/thumbnails/plant2.png',
+      image: `${process.env.PUBLIC_URL}/thumbnails/plant2.png`,
     },
     {
       id: 3,
       name: 'Basil',
       price: 6,
       category: 'Aromatic Plants',
-      image: '/thumbnails/plant1.svg',
+      image: `${process.env.PUBLIC_URL}/thumbnails/plant1.svg`,
     },
     {
       id: 4,
       name: 'Snake Plant',
       price: 15,
       category: 'Decorative Plants',
-      image: '/thumbnails/plant3.png',
+      image: `${process.env.PUBLIC_URL}/thumbnails/plant3.png`,
     },
     {
       id: 5,
       name: 'Aloe Vera',
       price: 12,
       category: 'Medicinal Plants',
-      image: '/thumbnails/plant2.png',
+      image: `${process.env.PUBLIC_URL}/thumbnails/plant2.png`,
     },
     {
       id: 6,
       name: 'Spider Plant',
       price: 9,
       category: 'Decorative Plants',
-      image: '/thumbnails/plant3.png',
+      image: `${process.env.PUBLIC_URL}/thumbnails/plant3.png`,
     },
   ];
+  
+
 
   // Group products by category
   const groupedProducts = products.reduce((acc, product) => {
