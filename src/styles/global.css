@@ -283,7 +283,8 @@ section.band { padding: clamp(56px, 8vw, 96px) 0; }
 .step p { font-size: 13.5px; margin: 0; }
 
 /* ---------- ABOUT ---------- */
-.dusk { background: linear-gradient(180deg, var(--dusk-b), var(--dusk-a)); border-block: 1px solid rgba(244, 247, 244, 0.08); }
+/* translucent so the fireworks behind stay visible through the section */
+.dusk { background: linear-gradient(180deg, rgba(10, 22, 16, 0.72), rgba(19, 41, 27, 0.72)); border-block: 1px solid rgba(244, 247, 244, 0.08); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
 .creds { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
 .cred { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 5px; background: rgba(4, 8, 10, 0.4); border: 1px solid rgba(244, 247, 244, 0.08); }

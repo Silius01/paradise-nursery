@@ -31,7 +31,8 @@ export default function FireworksBackground() {
 
     // Launch a shell that bursts in the upper region (around the hero logo).
     // tyFrac = target burst height as a fraction of viewport height (smaller = higher).
-    const launch = (px, palKey, tyFrac) => {
+    const TYPES = ['peony', 'peony', 'peony', 'willow', 'willow', 'ring', 'palm', 'crackle', 'double']
+    const launch = (px, palKey, tyFrac, type, scale) => {
       const pal = PALETTES[palKey] || PALETTES.green
       const ty = (tyFrac != null ? tyFrac : 0.15 + Math.random() * 0.28) * H
       const g = 0.12 * DPR
@@ -43,14 +44,61 @@ export default function FireworksBackground() {
         vy,
         ty,
         pal,
+        type: type || TYPES[Math.floor(Math.random() * TYPES.length)],
+        // ~28% of shells are big "finale" bursts
+        scale: scale != null ? scale : Math.random() < 0.28 ? 1.4 + Math.random() * 0.4 : 0.95 + Math.random() * 0.3,
       })
     }
-    const burst = (x, y, pal, count = 60) => {
-      for (let i = 0; i < count; i++) {
-        const a = Math.random() * 6.283
-        const sp = (Math.random() * 4 + 1.5) * DPR
-        const col = hexToRgb(pal[Math.floor(Math.random() * pal.length)])
-        sparks.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - DPR, c: col, life: 1, decay: Math.random() * 0.012 + 0.008, r: Math.random() * 1.6 + 0.8 })
+    const MAXP = 1700
+    const WHITE = [255, 255, 255]
+    const addP = (x, y, vx, vy, col, decay, r, g, f) => {
+      if (sparks.length >= MAXP) return
+      sparks.push({ x, y, vx, vy, c: col, life: 1, decay, r, g, f })
+    }
+
+    // Several firework shapes for variety. `scale` drives massiveness.
+    const burst = (x, y, pal, type = 'peony', scale = 1) => {
+      const S = DPR * scale
+      const pick = () => hexToRgb(pal[Math.floor(Math.random() * pal.length)])
+      if (type === 'ring') {
+        const n = 74
+        for (let i = 0; i < n; i++) {
+          const a = (i / n) * 6.283
+          const sp = 3.4 * S * (0.9 + Math.random() * 0.2)
+          addP(x, y, Math.cos(a) * sp, Math.sin(a) * sp, pick(), 0.009, 1.4, 0.03 * DPR, 0.986)
+        }
+      } else if (type === 'willow') {
+        const n = 110
+        for (let i = 0; i < n; i++) {
+          const a = Math.random() * 6.283
+          const sp = (Math.random() * 2.4 + 1.6) * S
+          addP(x, y, Math.cos(a) * sp, Math.sin(a) * sp - 0.5 * DPR, pick(), 0.0042, 1.7, 0.11 * DPR, 0.993)
+        }
+      } else if (type === 'palm') {
+        const n = 13
+        for (let i = 0; i < n; i++) {
+          const a = (i / n) * 6.283
+          const sp = (Math.random() * 1.6 + 4.6) * S
+          addP(x, y, Math.cos(a) * sp, Math.sin(a) * sp - 1.2 * DPR, pick(), 0.006, 2.5, 0.08 * DPR, 0.987)
+        }
+      } else if (type === 'crackle') {
+        burst(x, y, pal, 'peony', scale)
+        for (let i = 0; i < 60; i++) {
+          const a = Math.random() * 6.283
+          const sp = (Math.random() * 4.6 + 0.8) * S
+          addP(x, y, Math.cos(a) * sp, Math.sin(a) * sp, WHITE, 0.05, 1.1, 0.05 * DPR, 0.9)
+        }
+      } else if (type === 'double') {
+        burst(x, y, [pal[0]], 'ring', scale * 0.72)
+        burst(x, y, pal, 'peony', scale)
+      } else {
+        // peony / chrysanthemum
+        const n = Math.round(100 * scale)
+        for (let i = 0; i < n; i++) {
+          const a = Math.random() * 6.283
+          const sp = (Math.random() * 4.8 + 1.4) * S
+          addP(x, y, Math.cos(a) * sp, Math.sin(a) * sp - DPR, pick(), Math.random() * 0.011 + 0.006, Math.random() * 1.7 + 0.9, 0.05 * DPR, 0.985)
+        }
       }
     }
 
@@ -93,7 +141,7 @@ export default function FireworksBackground() {
         sh.vy += 0.12 * DPR
         // burst on reaching the target height (or if it starts to fall, as a safety)
         if (sh.y <= sh.ty || sh.vy >= 0) {
-          burst(sh.x, sh.y, sh.pal, 64)
+          burst(sh.x, sh.y, sh.pal, sh.type, sh.scale)
           shells.splice(j, 1)
         }
       }
@@ -101,9 +149,9 @@ export default function FireworksBackground() {
         const p = sparks[k]
         p.x += p.vx
         p.y += p.vy
-        p.vy += 0.05 * DPR
-        p.vx *= 0.985
-        p.vy *= 0.985
+        p.vy += p.g
+        p.vx *= p.f
+        p.vy *= p.f
         p.life -= p.decay
         if (p.life <= 0) {
           sparks.splice(k, 1)
@@ -130,11 +178,11 @@ export default function FireworksBackground() {
         void ignite.offsetWidth
         ignite.classList.add('go')
       }
-      t1 = setTimeout(() => burst(W * 0.5, H * 0.28, PALETTES.green, 120), 120)
+      t1 = setTimeout(() => burst(W * 0.5, H * 0.28, PALETTES.green, 'crackle', 1.7), 120)
       t2 = setTimeout(() => {
-        launch(W * 0.34, 'green', 0.24)
-        launch(W * 0.66, 'white', 0.32)
-      }, 640)
+        launch(W * 0.32, 'green', 0.24, 'willow', 1.4)
+        launch(W * 0.68, 'white', 0.34, 'double', 1.3)
+      }, 620)
     }
 
     return () => {
