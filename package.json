@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "homepage": "https://silius01.github.io/paradise-nursery",
+  "homepage": "https://silius01.github.io/USGSite",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
