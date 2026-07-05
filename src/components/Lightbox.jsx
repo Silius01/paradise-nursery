@@ -26,7 +26,7 @@ export default function Lightbox({ show, onClose }) {
       aria-label={show.name}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <Burst className="lb-art" pal={show.pal} />
+      <Burst className="lb-art" pal={show.pal} img={show.img} alt={show.alt} />
       <div className="lb-info">
         <div className="lb-t">{show.name}</div>
         <div className="lb-d">{show.meta}</div>

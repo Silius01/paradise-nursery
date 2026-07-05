@@ -1,3 +1,7 @@
+import featuredShow from '../assets/featured-show.jpg'
+
+export { featuredShow }
+
 // Firework palettes — brand green leads; others kept for realistic variety.
 export const PALETTES = {
   green: ['#7DF59A', '#3DB54E', '#e9fff0'],
@@ -9,6 +13,7 @@ export const PALETTES = {
 }
 
 export const FEATURED = [
+  { name: 'Central Texas Independence Day', kind: 'Municipal · July 4th', img: featuredShow, alt: 'A USG finale of aerial bursts and ground flame effects over a packed field of spectators', blurb: 'Aerial shells, low-break flame effects, and a wall of finale over a packed field — the kind of night a whole town turns out for.' },
   { name: 'Vista West Ranch', kind: 'Wedding · Pyromusical', pal: 'green', blurb: "A six-minute first-dance finale synced note-for-note to the couple's song." },
   { name: 'City of Pflugerville', kind: 'Municipal · July 4th', pal: 'white', blurb: 'An 18-minute civic display for 12,000 spectators — permits and COI handled end to end.' },
   { name: 'Drone + Pyro Hybrid', kind: 'Specialty · 200 Drones', pal: 'green', blurb: 'A 200-drone light show woven into live pyro — quiet, burn-ban-proof storytelling.' },
@@ -17,6 +22,7 @@ export const FEATURED = [
 ]
 
 export const GALLERY = [
+  { name: 'Central Texas Independence Day', meta: 'Municipal · flame + aerial finale', cat: 'municipal', img: featuredShow, alt: 'Fireworks finale with ground flame effects over a large crowd', h: 200 },
   { name: 'Vista West Ranch', meta: 'Wedding · 6 min · pyromusical', cat: 'wedding', pal: 'green', h: 150 },
   { name: 'City of Pflugerville', meta: 'Municipal · 18 min · July 4th', cat: 'municipal', pal: 'white', h: 120 },
   { name: 'Q4 Product Launch', meta: 'Corporate · cold spark + aerial', cat: 'corporate', pal: 'cyan', h: 170 },

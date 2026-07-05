@@ -1,11 +1,16 @@
 import { PALETTES } from '../data/shows'
 
-// The CSS-generated firework-burst placeholder art (stands in for real
-// show photos/video in the concept build).
-export default function Burst({ pal = 'green', className = '', style = {}, children, ...rest }) {
+// Firework artwork for cards/slides. Renders a real photo when `img` is given,
+// otherwise falls back to the CSS-generated firework-burst placeholder.
+export default function Burst({ pal = 'green', img, alt = '', className = '', style = {}, children, ...rest }) {
   const [c1, c2] = PALETTES[pal] || PALETTES.green
   return (
-    <div className={`burst ${className}`} style={{ '--c1': c1, '--c2': c2, ...style }} {...rest}>
+    <div
+      className={`burst ${img ? 'has-img' : ''} ${className}`}
+      style={{ '--c1': c1, '--c2': c2, ...style }}
+      {...rest}
+    >
+      {img && <img className="burst-photo" src={img} alt={alt} loading="lazy" />}
       {children}
     </div>
   )

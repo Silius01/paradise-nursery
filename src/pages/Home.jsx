@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import Carousel from '../components/Carousel'
 import { ShieldCheck, Card, Launch, Spark } from '../components/Icons'
-import { HIGHLIGHTS } from '../data/shows'
+import { HIGHLIGHTS, featuredShow } from '../data/shows'
 import logo from '../assets/logo.png'
 
 export default function Home() {
@@ -49,6 +49,25 @@ export default function Home() {
                 <span className="go">Explore →</span>
               </button>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="band" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="featured-banner">
+            <img src={featuredShow} alt="A USG finale of aerial bursts and ground flame effects over a packed field of spectators" />
+            <div className="fb-overlay">
+              <p className="eyebrow">From a Recent Show</p>
+              <h2>The kind of night the whole town drives out for.</h2>
+              <span className="fb-cap">
+                Aerial shells, low-break flame effects, and a wall of finale over a packed Central
+                Texas field — designed, permitted, and fired by our crew.
+              </span>
+              <Link className="btn btn-primary" to="/gallery">
+                See More Shows →
+              </Link>
+            </div>
           </div>
         </div>
       </section>

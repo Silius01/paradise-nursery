@@ -51,7 +51,7 @@ export default function Carousel() {
       <div className="slides" style={{ transform: `translateX(-${idx * 100}%)` }}>
         {FEATURED.map((f, i) => (
           <div className="slide" key={f.name} role="group" aria-label={`${i + 1} of ${N}: ${f.name}`}>
-            <Burst className="art" pal={f.pal} />
+            <Burst className="art" pal={f.pal} img={f.img} alt={f.alt} />
             <div className="cap">
               <div className="k">{f.kind}</div>
               <h3>{f.name}</h3>

@@ -9,8 +9,8 @@ export default function GalleryPage() {
             <p className="eyebrow">The Portfolio</p>
             <h2>Every burst is one we designed and fired.</h2>
             <p>
-              Filter by the kind of night you&apos;re planning. Full shows open in the reel — this
-              preview uses placeholder art in the concept build.
+              Filter by the kind of night you&apos;re planning. We&apos;re adding real show
+              photography now — the remaining tiles use placeholder art for the concept build.
             </p>
           </div>
           <Gallery />

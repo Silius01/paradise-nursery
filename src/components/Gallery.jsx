@@ -31,7 +31,7 @@ export default function Gallery() {
             aria-label={`${g.name} — ${g.meta}`}
             onClick={() => setSelected(g)}
           >
-            <Burst className="art" pal={g.pal} style={{ height: `${g.h}px` }}>
+            <Burst className="art" pal={g.pal} img={g.img} alt={g.alt} style={{ height: `${g.h}px` }}>
               <span className="tag">{g.cat}</span>
               <span className="play" aria-hidden="true" />
               <div className="meta">
