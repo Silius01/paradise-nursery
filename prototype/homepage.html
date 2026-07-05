@@ -1,25 +1,27 @@
-<title>Manor Pyrotechnics — Fireworks, Choreographed</title>
+<title>USG Pyrotechnics &amp; FX — Fireworks, Choreographed</title>
 <!--
-  Homepage concept prototype for a Manor, TX pyrotechnics company.
+  Homepage concept prototype for USG Pyrotechnics & FX — Manor, TX.
+  Core scheme derived from the company logo: black ground, white ink,
+  brand green (#3DB54E) accent + the logo's green-stripe device.
   Deliberate single visual world: this is the night sky, so the page commits
   to dark rather than shipping a light theme. Everything is self-contained
   (no external fonts/images/scripts) so it renders under a strict CSP.
 -->
 <style>
   :root {
-    /* Grounds — a night sky, biased warm toward the ember accent */
-    --night:      #05070D;
-    --panel:      #0F1420;
-    --charcoal:   #171C28;
-    --dusk-a:     #241a3d;   /* twilight the page scrolls up out of */
-    --dusk-b:     #12132a;
+    /* Grounds — near-black, biased slightly toward the brand green */
+    --night:      #04080A;
+    --panel:      #0B120E;
+    --charcoal:   #101813;
+    --dusk-a:     #13291b;   /* faint green atmosphere the page scrolls up out of */
+    --dusk-b:     #0a1610;
     /* Ink */
-    --ink:        #F5F3EA;   /* warm off-white, softer than pure white on black */
-    --muted:      #B9BDC9;
-    --faint:      #7d8293;
-    /* Sparks — used sparingly, imagery carries the color */
-    --ember:      #F2A93B;
-    --ember-deep: #d98a1f;
+    --ink:        #F4F7F4;   /* crisp near-white, matching the logo */
+    --muted:      #AEB8B1;
+    --faint:      #74817a;
+    /* Brand — USG green (kept under the --ember name used throughout the file) */
+    --ember:      #3DB54E;
+    --ember-deep: #2B8C3B;
     --magenta:    #FF3D7F;
     --cyan:       #2EE6D6;
     /* System */
@@ -53,15 +55,17 @@
 
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
-  ::selection { background: var(--ember); color: #1a1206; }
+  ::selection { background: var(--ember); color: #04140a; }
   :focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; border-radius: 3px; }
 
   .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--edge); }
 
   .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
     font-size: 12px; letter-spacing: .32em; text-transform: uppercase;
     color: var(--ember); font-weight: 600; margin: 0 0 18px;
   }
+  .eyebrow::before { content: ""; width: 26px; height: 3px; background: var(--ember); flex: none; }
   .eyebrow.mute { color: var(--faint); }
 
   h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.05; text-wrap: balance; margin: 0; }
@@ -76,8 +80,8 @@
     padding: 15px 26px; border-radius: 2px; border: 1px solid transparent;
     cursor: pointer; transition: transform .18s ease, background .2s ease, box-shadow .2s ease;
   }
-  .btn-primary { background: var(--ember); color: #1a1206; box-shadow: 0 0 0 rgba(242,169,59,0); }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 34px -8px rgba(242,169,59,.6); }
+  .btn-primary { background: var(--ember); color: #04140a; box-shadow: 0 0 0 rgba(61,181,78,0); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 34px -8px rgba(61,181,78,.6); }
   .btn-ghost { background: transparent; color: var(--ink); border-color: rgba(245,243,234,.28); }
   .btn-ghost:hover { border-color: var(--ember); color: var(--ember); }
 
@@ -89,10 +93,15 @@
     border-bottom: 1px solid transparent;
   }
   nav.solid { background: rgba(11,14,22,.82); backdrop-filter: blur(12px); padding-block: 14px; border-bottom-color: rgba(245,243,234,.08); }
-  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 20px; letter-spacing: .02em; }
-  .brand .spark { width: 11px; height: 11px; border-radius: 50%; background: var(--ember);
-    box-shadow: 0 0 14px 2px var(--ember), 0 0 30px 6px rgba(242,169,59,.5); }
-  .brand small { font-family: var(--sans); font-size: 10px; letter-spacing: .28em; color: var(--faint); text-transform: uppercase; display:block; margin-top: 2px;}
+  .brand { display: flex; align-items: center; }
+  .logo { display: flex; flex-direction: column; line-height: 1; }
+  /* recreates the logo: white block letters with the green stripe running through */
+  .logo-usg {
+    font-family: var(--sans); font-weight: 900; font-size: 22px; letter-spacing: 4px;
+    color: var(--ink); align-self: flex-start; padding: 3px 3px;
+    background: linear-gradient(var(--ember), var(--ember)) left center / 100% 42% no-repeat;
+  }
+  .logo-sub { font-family: var(--sans); font-size: 8.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); margin-top: 5px; }
   .navlinks { display: flex; align-items: center; gap: 30px; font-size: 14px; letter-spacing: .02em; }
   .navlinks a { color: var(--muted); transition: color .2s; }
   .navlinks a:hover { color: var(--ink); }
@@ -127,7 +136,7 @@
     color: var(--faint); background: rgba(11,14,22,.6); border: 1px solid rgba(245,243,234,.12);
     padding: 9px 14px; border-radius: 40px; cursor: pointer; backdrop-filter: blur(8px);
   }
-  .sound:hover { color: var(--ink); border-color: rgba(242,169,59,.5); }
+  .sound:hover { color: var(--ink); border-color: rgba(61,181,78,.5); }
   .sound b { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); }
   .sound.on b { background: var(--ember); box-shadow: 0 0 10px var(--ember); }
 
@@ -153,7 +162,7 @@
     background: transparent; cursor: pointer; transition: all .2s;
   }
   .chip:hover { color: var(--ink); border-color: rgba(245,243,234,.4); }
-  .chip.active { background: var(--ember); color: #1a1206; border-color: var(--ember); font-weight: 600; }
+  .chip.active { background: var(--ember); color: #04140a; border-color: var(--ember); font-weight: 600; }
 
   /* gallery grid */
   .grid { columns: 3 260px; column-gap: 16px; }
@@ -202,9 +211,9 @@
     padding: 30px 26px 34px; border-radius: 4px; background: var(--panel);
     border: 1px solid rgba(245,243,234,.08); transition: border-color .25s, transform .25s;
   }
-  .svc:hover { border-color: rgba(242,169,59,.45); transform: translateY(-3px); }
+  .svc:hover { border-color: rgba(61,181,78,.45); transform: translateY(-3px); }
   .svc .ic { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 20px;
-    background: radial-gradient(circle, rgba(242,169,59,.22), transparent 70%); }
+    background: radial-gradient(circle, rgba(61,181,78,.22), transparent 70%); }
   .svc h3 { margin-bottom: 10px; }
   .svc p { font-size: 14.5px; margin: 0; }
   .svc.specialty { background: linear-gradient(160deg, rgba(255,61,127,.09), rgba(46,230,214,.06)), var(--panel); }
@@ -222,7 +231,7 @@
   .opt { font-size: 13px; padding: 9px 15px; border-radius: 3px; border: 1px solid rgba(245,243,234,.18);
     background: transparent; color: var(--muted); cursor: pointer; transition: all .18s; }
   .opt:hover { color: var(--ink); }
-  .opt.sel { border-color: var(--ember); color: var(--ink); background: rgba(242,169,59,.12); }
+  .opt.sel { border-color: var(--ember); color: var(--ink); background: rgba(61,181,78,.12); }
   .swatch { width: 34px; height: 34px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform .15s; }
   .swatch:hover { transform: scale(1.12); }
   .swatch.sel { border-color: var(--ink); box-shadow: 0 0 0 2px var(--night), 0 0 14px currentColor; }
@@ -233,7 +242,7 @@
   .step { padding: 26px 18px; position: relative; }
   .step .n { font-family: var(--serif); font-size: 13px; color: var(--ember); letter-spacing: .1em; }
   .step .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--night); border: 2px solid var(--ember); margin: 14px 0; position: relative; }
-  .step .bar { position: absolute; top: 60px; left: 24px; right: -2px; height: 1px; background: rgba(242,169,59,.3); }
+  .step .bar { position: absolute; top: 60px; left: 24px; right: -2px; height: 1px; background: rgba(61,181,78,.3); }
   .step:last-child .bar { display: none; }
   .step h3 { font-size: 17px; margin-bottom: 6px; }
   .step p { font-size: 13.5px; margin: 0; }
@@ -309,9 +318,11 @@
 <div id="ignite"></div>
 
 <nav id="nav">
-  <a class="brand" href="#top">
-    <span class="spark"></span>
-    <span>Meridian Pyrotechnics<small>Manor · Central Texas</small></span>
+  <a class="brand" href="#top" aria-label="USG Pyrotechnics and FX — home">
+    <span class="logo">
+      <span class="logo-usg">USG</span>
+      <span class="logo-sub">Pyrotechnics &amp; FX · Manor, TX</span>
+    </span>
   </a>
   <div class="navlinks">
     <a href="#gallery">Gallery</a>
@@ -343,15 +354,15 @@
 <div class="trust">
   <div class="wrap">
     <div class="badge">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
       ATF Licensed
     </div>
     <div class="badge">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16M9 15h3"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16M9 15h3"/></svg>
       TDLR-Licensed Operators
     </div>
     <div class="badge">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><path d="M12 3v18M3 8h18M5 8l7-5 7 5"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><path d="M12 3v18M3 8h18M5 8l7-5 7 5"/></svg>
       NFPA 1123 Compliant
     </div>
     <div class="stat"><b>500+</b><span>Shows Fired</span></div>
@@ -450,19 +461,19 @@
       </div>
       <div class="creds reveal">
         <div class="cred">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
           <div><b>ATF Federal License</b><span>Storage &amp; use of 1.3G display fireworks</span></div>
         </div>
         <div class="cred">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
           <div><b>TDLR Operators</b><span>State-licensed lead pyrotechnicians</span></div>
         </div>
         <div class="cred">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <div><b>$5M Liability</b><span>COI naming your venue on request</span></div>
         </div>
         <div class="cred">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><path d="M12 2v20M4 7l8-5 8 5"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><path d="M12 2v20M4 7l8-5 8 5"/></svg>
           <div><b>Electronic Firing</b><span>Music-synced, frame-accurate choreography</span></div>
         </div>
       </div>
@@ -519,7 +530,7 @@
 <footer>
   <div class="foot-grid">
     <div>
-      <a class="brand" href="#top" style="margin-bottom:14px"><span class="spark"></span><span>Meridian Pyrotechnics</span></a>
+      <a class="brand" href="#top" style="margin-bottom:14px"><span class="logo"><span class="logo-usg">USG</span><span class="logo-sub">Pyrotechnics &amp; FX</span></span></a>
       <p style="font-size:13.5px; max-width:280px">Licensed aerial, close-proximity, cold-spark, and drone displays across Central Texas. Manor · Austin · Hill Country.</p>
     </div>
     <div><h4>Shows</h4><a href="#services">Weddings</a><a href="#services">Municipal</a><a href="#services">Corporate</a><a href="#services">Cold Spark</a><a href="#services">Drone Shows</a></div>
@@ -527,7 +538,7 @@
     <div><h4>Service Area</h4><a href="#quote">Manor</a><a href="#quote">Austin</a><a href="#quote">Round Rock</a><a href="#quote">Bastrop</a><a href="#quote">Lake Travis</a></div>
   </div>
   <div class="foot-bottom">
-    <span>© 2026 Meridian Pyrotechnics · Concept prototype</span>
+    <span>© 2026 USG Pyrotechnics &amp; FX · Concept prototype</span>
     <span>ATF Licensed · TDLR Operators · Fully Insured · Privacy Policy</span>
   </div>
 </footer>
@@ -539,26 +550,27 @@
 
   /* ---------- DATA ---------- */
   var PALETTES = {
+    green:   ["#7DF59A", "#3DB54E", "#e9fff0"],
+    white:   ["#ffffff", "#bfffcf", "#7DF59A"],
     gold:    ["#FFD86B", "#F2A93B", "#ff7a1a"],
     magenta: ["#FF3D7F", "#ff8ab0", "#c11e56"],
     cyan:    ["#2EE6D6", "#8bfff2", "#0fa9a0"],
-    reveal:  ["#FF3D7F", "#3A8DFF", "#ffffff"],
-    patriot: ["#ff4d4d", "#ffffff", "#4d79ff"]
+    reveal:  ["#FF3D7F", "#3A8DFF", "#ffffff"]
   };
 
   var GALLERY = [
-    ["Vista West Ranch", "Wedding · 6 min · pyromusical", "wedding", "gold", 150],
-    ["City of Pflugerville", "Municipal · 18 min · July 4th", "municipal", "patriot", 120],
+    ["Vista West Ranch", "Wedding · 6 min · pyromusical", "wedding", "green", 150],
+    ["City of Pflugerville", "Municipal · 18 min · July 4th", "municipal", "white", 120],
     ["Q4 Product Launch", "Corporate · cold spark + aerial", "corporate", "cyan", 170],
     ["Blanco County Fair", "Festival · grand finale", "festival", "gold", 130],
-    ["Hill Country Estate", "Wedding · monogram finale", "wedding", "magenta", 190],
+    ["Hill Country Estate", "Wedding · monogram finale", "wedding", "green", 190],
     ["It's a Girl!", "Reveal · ground + aerial", "specialty", "reveal", 120],
-    ["Downtown NYE", "Municipal · midnight count", "municipal", "cyan", 160],
-    ["Dell Diamond", "Corporate · stadium walk-out", "corporate", "patriot", 140],
-    ["Lakeway Barge Show", "Festival · waterfront", "festival", "gold", 175],
+    ["Downtown NYE", "Municipal · midnight count", "municipal", "green", 160],
+    ["Dell Diamond", "Corporate · stadium walk-out", "corporate", "white", 140],
+    ["Lakeway Barge Show", "Festival · waterfront", "festival", "green", 175],
     ["Indoor Gala", "Specialty · cold spark fountains", "specialty", "cyan", 120],
     ["Ranch Proposal", "Wedding · private, 3 min", "wedding", "magenta", 145],
-    ["Drone + Pyro Hybrid", "Specialty · 200-drone show", "specialty", "reveal", 200]
+    ["Drone + Pyro Hybrid", "Specialty · 200-drone show", "specialty", "green", 200]
   ];
 
   var SERVICES = [
@@ -618,7 +630,7 @@
     var el = document.createElement("div");
     el.className = "svc reveal" + (s[2] ? " specialty" : "");
     el.innerHTML =
-      (s[2] ? '<span class="pill">Burn-ban proof</span>' : '<div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2A93B" stroke-width="1.6"><path d="M12 3v6M12 15v6M3 12h6M15 12h6M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/></svg></div>') +
+      (s[2] ? '<span class="pill">Burn-ban proof</span>' : '<div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3DB54E" stroke-width="1.6"><path d="M12 3v6M12 15v6M3 12h6M15 12h6M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/></svg></div>') +
       '<h3>' + s[0] + '</h3><p>' + s[1] + '</p>';
     svcGrid.appendChild(el);
   });
@@ -732,8 +744,8 @@
   if (!reduce) {
     window.addEventListener("load", function () {
       document.getElementById("ignite").classList.add("go");
-      setTimeout(function () { burst(W * 0.5, H * 0.32, PALETTES.gold, 120); }, 120);
-      setTimeout(function () { launch(W * 0.3, "magenta"); launch(W * 0.7, "cyan"); }, 700);
+      setTimeout(function () { burst(W * 0.5, H * 0.32, PALETTES.green, 120); }, 120);
+      setTimeout(function () { launch(W * 0.3, "green"); launch(W * 0.7, "white"); }, 700);
     });
   }
 
@@ -781,11 +793,11 @@
   }
 
   /* ---------- CONFIGURATOR ---------- */
-  var cfg = { occ: "Wedding", pal: "gold", int: 2 };
+  var cfg = { occ: "Wedding", pal: "green", int: 2 };
   var palRow = document.getElementById("palRow");
   Object.keys(PALETTES).forEach(function (k, idx) {
     var b = document.createElement("button");
-    b.className = "swatch" + (k === "gold" ? " sel" : "");
+    b.className = "swatch" + (k === "green" ? " sel" : "");
     b.style.background = "linear-gradient(135deg," + PALETTES[k][0] + "," + PALETTES[k][1] + ")";
     b.style.color = PALETTES[k][0];
     b.setAttribute("aria-label", k + " palette");
