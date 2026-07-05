@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Carousel from '../components/Carousel'
 import { ShieldCheck, Card, Launch, Spark } from '../components/Icons'
 import { HIGHLIGHTS } from '../data/shows'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.png'
 
 export default function Home() {
   const navigate = useNavigate()

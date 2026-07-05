@@ -100,7 +100,7 @@ nav {
 }
 nav.solid { background: rgba(6, 10, 8, 0.86); backdrop-filter: blur(12px); border-bottom-color: rgba(244, 247, 244, 0.08); }
 .brand { display: flex; align-items: center; cursor: pointer; background: none; border: 0; padding: 0; }
-.brand img { height: 40px; width: auto; mix-blend-mode: screen; }
+.brand img { height: 40px; width: auto; }
 .navlinks { display: flex; align-items: center; gap: 26px; font-size: 14px; letter-spacing: 0.02em; }
 .navlinks a { color: var(--muted); transition: color 0.2s; position: relative; padding: 4px 0; }
 .navlinks a:hover { color: var(--ink); }
@@ -137,7 +137,7 @@ section.band { padding: clamp(56px, 8vw, 96px) 0; }
 
 /* ---------- HERO ---------- */
 .hero { padding: 130px var(--edge) 44px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.hero .logo-big { width: min(560px, 84vw); mix-blend-mode: screen; margin-bottom: 6px; }
+.hero .logo-big { width: min(560px, 84vw); margin-bottom: 6px; }
 .hero h1 { font-size: clamp(26px, 4.6vw, 46px); margin-top: 6px; }
 .hero .lede { font-size: clamp(16px, 2vw, 20px); max-width: 560px; margin: 20px auto 30px; color: var(--muted); }
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
@@ -328,7 +328,7 @@ form.quote { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 /* ---------- FOOTER ---------- */
 footer { padding: 60px var(--edge) 36px; border-top: 1px solid rgba(244, 247, 244, 0.08); background: var(--charcoal); position: relative; z-index: 1; }
 .foot-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 28px; }
-.foot-grid img { height: 44px; mix-blend-mode: screen; margin-bottom: 12px; }
+.foot-grid img { height: 44px; margin-bottom: 12px; }
 .foot-grid h4 { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin: 0 0 15px; }
 .foot-grid a { display: block; color: var(--muted); font-size: 14px; padding: 5px 0; cursor: pointer; }
 .foot-grid a:hover { color: var(--green); }

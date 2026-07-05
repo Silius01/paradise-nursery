@@ -29,15 +29,20 @@ export default function FireworksBackground() {
     resize()
     window.addEventListener('resize', resize)
 
-    const launch = (px, palKey) => {
+    // Launch a shell that bursts in the upper region (around the hero logo).
+    // tyFrac = target burst height as a fraction of viewport height (smaller = higher).
+    const launch = (px, palKey, tyFrac) => {
       const pal = PALETTES[palKey] || PALETTES.green
+      const ty = (tyFrac != null ? tyFrac : 0.15 + Math.random() * 0.28) * H
+      const g = 0.12 * DPR
+      // velocity chosen so the shell reaches ty with a little momentum to spare
+      const vy = -Math.sqrt(2 * g * Math.max(1, H - ty)) * 1.04
       shells.push({
-        x: px != null ? px : (0.15 + Math.random() * 0.7) * W,
+        x: px != null ? px : (0.28 + Math.random() * 0.44) * W,
         y: H,
-        vy: -(Math.random() * 3 + 9.5) * DPR,
+        vy,
+        ty,
         pal,
-        life: 0,
-        max: Math.random() * 20 + 42,
       })
     }
     const burst = (x, y, pal, count = 60) => {
@@ -66,7 +71,7 @@ export default function FireworksBackground() {
       if (reduce) return
 
       ctx.globalCompositeOperation = 'lighter'
-      if (ts - lastLaunch > 900 + Math.random() * 900 && shells.length < 4) {
+      if (ts - lastLaunch > 750 + Math.random() * 750 && shells.length < 5) {
         const keys = Object.keys(PALETTES)
         launch(null, keys[Math.floor(Math.random() * keys.length)])
         lastLaunch = ts
@@ -86,9 +91,9 @@ export default function FireworksBackground() {
         ctx.stroke()
         sh.y += sh.vy
         sh.vy += 0.12 * DPR
-        sh.life++
-        if (sh.vy >= -1.5 * DPR || sh.life > sh.max) {
-          burst(sh.x, sh.y, sh.pal, 60)
+        // burst on reaching the target height (or if it starts to fall, as a safety)
+        if (sh.y <= sh.ty || sh.vy >= 0) {
+          burst(sh.x, sh.y, sh.pal, 64)
           shells.splice(j, 1)
         }
       }
@@ -125,11 +130,11 @@ export default function FireworksBackground() {
         void ignite.offsetWidth
         ignite.classList.add('go')
       }
-      t1 = setTimeout(() => burst(W * 0.5, H * 0.34, PALETTES.green, 110), 120)
+      t1 = setTimeout(() => burst(W * 0.5, H * 0.28, PALETTES.green, 120), 120)
       t2 = setTimeout(() => {
-        launch(W * 0.32, 'green')
-        launch(W * 0.7, 'white')
-      }, 700)
+        launch(W * 0.34, 'green', 0.24)
+        launch(W * 0.66, 'white', 0.32)
+      }, 640)
     }
 
     return () => {
