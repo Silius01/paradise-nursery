@@ -31,6 +31,57 @@ export default function FireworksBackground() {
 
     // Launch a shell that bursts in the upper region (around the hero logo).
     // tyFrac = target burst height as a fraction of viewport height (smaller = higher).
+    // --- USG letter-shaped bursts -------------------------------------------
+    // Sample points that fill a glyph, then explode particles out to those
+    // points and let friction settle them into the letter shape.
+    const letterCache = {}
+    const letterPoints = (ch) => {
+      const FH = 74
+      const c = document.createElement('canvas')
+      const g = c.getContext('2d')
+      g.font = `900 ${FH}px Arial, sans-serif`
+      c.width = Math.ceil(g.measureText(ch).width) + 8
+      c.height = FH + 14
+      g.font = `900 ${FH}px Arial, sans-serif` // resizing the canvas reset the context
+      g.fillStyle = '#fff'
+      g.textBaseline = 'top'
+      g.fillText(ch, 4, 4)
+      const data = g.getImageData(0, 0, c.width, c.height).data
+      const pts = []
+      const step = 5
+      for (let py = 0; py < c.height; py += step) {
+        for (let px = 0; px < c.width; px += step) {
+          if (data[(py * c.width + px) * 4 + 3] > 128) pts.push([px / c.width, py / c.height])
+        }
+      }
+      return { pts, aspect: c.width / c.height }
+    }
+    const getPts = (ch) => letterCache[ch] || (letterCache[ch] = letterPoints(ch))
+    const letterBurst = (cx, cy, ch, pal) => {
+      const { pts, aspect } = getPts(ch)
+      const sizeH = Math.min(H * 0.17, W * 0.15)
+      const sizeW = sizeH * aspect
+      const f = 0.9 // displacement settles at (target - center) with this friction
+      for (let i = 0; i < pts.length; i++) {
+        const tx = cx + (pts[i][0] - 0.5) * sizeW
+        const ty = cy + (pts[i][1] - 0.5) * sizeH
+        const col = hexToRgb(pal[Math.floor(Math.random() * pal.length)])
+        const jx = (Math.random() - 0.5) * 3 * DPR
+        const jy = (Math.random() - 0.5) * 3 * DPR
+        addP(cx, cy, (tx - cx + jx) * (1 - f), (ty - cy + jy) * (1 - f), col, 0.0052, 1.6, 0.004 * DPR, f)
+      }
+    }
+    // Spell "USG" across the sky — U left, S centre, G right, bursting together.
+    const fireUSG = () => {
+      // burst low, in the open sky below the hero logo/content
+      const ty = 0.74 * H
+      const g = 0.12 * DPR
+      const vy = -Math.sqrt(2 * g * Math.max(1, H - ty)) * 1.04
+      ;[['U', 0.31], ['S', 0.5], ['G', 0.69]].forEach(([ch, fx]) => {
+        shells.push({ x: fx * W, y: H, vy, ty, pal: PALETTES.white, type: 'letter', letter: ch })
+      })
+    }
+
     const TYPES = ['peony', 'peony', 'peony', 'willow', 'willow', 'ring', 'palm', 'crackle', 'double']
     const launch = (px, palKey, tyFrac, type, scale) => {
       const pal = PALETTES[palKey] || PALETTES.green
@@ -103,6 +154,7 @@ export default function FireworksBackground() {
     }
 
     let lastLaunch = 0
+    let lastUSG = 0
     const frame = (ts) => {
       raf = requestAnimationFrame(frame)
       ctx.clearRect(0, 0, W, H)
@@ -124,6 +176,11 @@ export default function FireworksBackground() {
         launch(null, keys[Math.floor(Math.random() * keys.length)])
         lastLaunch = ts
       }
+      // occasionally spell out USG
+      if (ts - lastUSG > 15000 + Math.random() * 9000) {
+        fireUSG()
+        lastUSG = ts
+      }
       for (let j = shells.length - 1; j >= 0; j--) {
         const sh = shells[j]
         ctx.globalAlpha = 1
@@ -141,7 +198,8 @@ export default function FireworksBackground() {
         sh.vy += 0.12 * DPR
         // burst on reaching the target height (or if it starts to fall, as a safety)
         if (sh.y <= sh.ty || sh.vy >= 0) {
-          burst(sh.x, sh.y, sh.pal, sh.type, sh.scale)
+          if (sh.type === 'letter') letterBurst(sh.x, sh.y, sh.letter, sh.pal)
+          else burst(sh.x, sh.y, sh.pal, sh.type, sh.scale)
           shells.splice(j, 1)
         }
       }
@@ -169,7 +227,7 @@ export default function FireworksBackground() {
     raf = requestAnimationFrame(frame)
 
     // one-shot "ignite" on first mount
-    let t1, t2
+    let t1, t2, t3
     if (!reduce) {
       const ignite = igniteRef.current
       if (ignite) {
@@ -183,6 +241,8 @@ export default function FireworksBackground() {
         launch(W * 0.32, 'green', 0.24, 'willow', 1.4)
         launch(W * 0.68, 'white', 0.34, 'double', 1.3)
       }, 620)
+      // showcase the USG letters shortly after load
+      t3 = setTimeout(fireUSG, 2800)
     }
 
     return () => {
@@ -190,6 +250,7 @@ export default function FireworksBackground() {
       window.removeEventListener('resize', resize)
       clearTimeout(t1)
       clearTimeout(t2)
+      clearTimeout(t3)
     }
   }, [reduce])
 
