@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
-import { YouTube, Facebook, XTwitter } from './Icons'
+import { YouTube, Facebook, Instagram, XTwitter } from './Icons'
 
 // href null = account not live yet (shown but not linked)
 const SOCIAL = [
   { name: 'YouTube', href: 'https://www.youtube.com/@usgpyrotechnics7869', Icon: YouTube },
+  { name: 'Instagram', href: 'https://www.instagram.com/usgpyro', Icon: Instagram },
   { name: 'Facebook', href: 'https://www.facebook.com/USGpyrotechnics', Icon: Facebook },
   { name: 'X', href: null, Icon: XTwitter },
 ]
