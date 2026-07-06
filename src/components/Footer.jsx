@@ -5,7 +5,7 @@ import { YouTube, Facebook, XTwitter } from './Icons'
 // href null = account not live yet (shown but not linked)
 const SOCIAL = [
   { name: 'YouTube', href: 'https://www.youtube.com/@usgpyrotechnics7869', Icon: YouTube },
-  { name: 'Facebook', href: null, Icon: Facebook },
+  { name: 'Facebook', href: 'https://www.facebook.com/USGpyrotechnics', Icon: Facebook },
   { name: 'X', href: null, Icon: XTwitter },
 ]
 
