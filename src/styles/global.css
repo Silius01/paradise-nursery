@@ -358,6 +358,10 @@ footer { padding: 60px var(--edge) 36px; border-top: 1px solid rgba(244, 247, 24
 .foot-grid h4 { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin: 0 0 15px; }
 .foot-grid a { display: block; color: var(--muted); font-size: 14px; padding: 5px 0; cursor: pointer; }
 .foot-grid a:hover { color: var(--green); }
+.socials { display: flex; gap: 10px; margin-top: 18px; }
+.socials a, .socials span { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; border: 1px solid rgba(244, 247, 244, 0.16); color: var(--muted); transition: color 0.2s, border-color 0.2s, background 0.2s; }
+.socials a:hover { color: var(--green); border-color: var(--green); background: rgba(61, 181, 78, 0.1); }
+.socials .soon { opacity: 0.4; cursor: default; }
 .foot-bottom { max-width: var(--maxw); margin: 36px auto 0; padding-top: 22px; border-top: 1px solid rgba(244, 247, 244, 0.08); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 12px; color: var(--faint); }
 
 /* ---------- LIGHTBOX ---------- */

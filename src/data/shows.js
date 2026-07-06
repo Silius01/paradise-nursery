@@ -16,7 +16,7 @@ export const FEATURED = [
   { name: 'Central Texas Independence Day', kind: 'Municipal · July 4th', img: featuredShow, alt: 'A USG finale of aerial bursts and ground flame effects over a packed field of spectators', blurb: 'Aerial shells, low-break flame effects, and a wall of finale over a packed field — the kind of night a whole town turns out for.' },
   { name: 'Vista West Ranch', kind: 'Wedding · Pyromusical', pal: 'green', blurb: "A six-minute first-dance finale synced note-for-note to the couple's song." },
   { name: 'City of Pflugerville', kind: 'Municipal · July 4th', pal: 'white', blurb: 'An 18-minute civic display for 12,000 spectators — permits and COI handled end to end.' },
-  { name: 'Drone + Pyro Hybrid', kind: 'Specialty · 200 Drones', pal: 'green', blurb: 'A 200-drone light show woven into live pyro — quiet, burn-ban-proof storytelling.' },
+  { name: 'Downtown Pyromusical', kind: 'Corporate · Music-Synced', pal: 'cyan', blurb: 'A brand-color pyromusical choreographed shell-for-shell to the soundtrack.' },
   { name: 'Hill Country Estate', kind: 'Wedding · Monogram Finale', pal: 'magenta', blurb: "The couple's initials written in the sky above a private ranch." },
   { name: 'Indoor Gala', kind: 'Specialty · Cold Spark', pal: 'cyan', blurb: 'No open flame, no permits, no smoke — indoor-safe fountains for a black-tie launch.' },
 ]
@@ -34,7 +34,7 @@ export const GALLERY = [
   { name: 'Lakeway Barge Show', meta: 'Festival · waterfront', cat: 'festival', pal: 'green', h: 175 },
   { name: 'Indoor Gala', meta: 'Specialty · cold spark fountains', cat: 'specialty', pal: 'cyan', h: 120 },
   { name: 'Ranch Proposal', meta: 'Wedding · private, 3 min', cat: 'wedding', pal: 'magenta', h: 145 },
-  { name: 'Drone + Pyro Hybrid', meta: 'Specialty · 200-drone show', cat: 'specialty', pal: 'green', h: 200 },
+  { name: 'Close-Proximity Effects', meta: 'Specialty · stage & indoor', cat: 'specialty', pal: 'cyan', h: 200 },
 ]
 
 export const GALLERY_FILTERS = [
@@ -52,13 +52,13 @@ export const SERVICES = [
   { title: 'Corporate & Grand Openings', body: 'Brand-color choreography, stadium walk-outs, and product-launch moments.', specialty: false },
   { title: 'Festivals & Fairs', body: 'County-fair finales and waterfront barge shows scaled to your crowd and site.', specialty: false },
   { title: 'Cold Spark Fountains', body: 'Indoor-safe, no open flame, no permit headaches — perfect for venues that ban aerial pyro.', specialty: true },
-  { title: 'Drone Light Shows', body: 'Quiet, pet-friendly, burn-ban-proof aerial storytelling — solo or synced with fireworks.', specialty: true },
+  { title: 'Close-Proximity Effects', body: 'Indoor- and stage-safe gerbs, fountains, and low-fallout effects for venues without room for aerial.', specialty: true },
 ]
 
 export const HIGHLIGHTS = [
   { title: 'Weddings', body: 'Cinematic finales designed to your first dance.', to: '/gallery' },
   { title: 'Municipal Shows', body: 'Civic displays with every permit handled.', to: '/services' },
-  { title: 'Cold Spark & Drone', body: 'Burn-ban-proof effects, indoor or out.', to: '/services' },
+  { title: 'Cold Spark & Effects', body: 'Indoor-safe, burn-ban-proof effects.', to: '/services' },
   { title: 'Build Your Show', body: 'Design it live, then send it to a quote.', to: '/contact' },
 ]
 

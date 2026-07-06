@@ -14,8 +14,8 @@ export default function Home() {
           Fireworks, <span className="accent">choreographed.</span>
         </h1>
         <p className="lede">
-          Licensed aerial displays, cold-spark effects, and drone shows for Central Texas weddings,
-          cities, and celebrations — designed to the finale, delivered safely.
+          Licensed aerial displays, cold-spark effects, and music-synced pyromusicals for Central
+          Texas weddings, cities, and celebrations — designed to the finale, delivered safely.
         </p>
         <div className="hero-cta">
           <Link className="btn btn-primary" to="/contact">

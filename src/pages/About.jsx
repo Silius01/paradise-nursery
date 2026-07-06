@@ -30,7 +30,7 @@ export default function About() {
             <p style={{ color: 'var(--ink)' }}>
               <strong>Burn ban? Often still a go.</strong> Licensed public displays can frequently
               proceed under an approved burn-ban exception with proper permitting — or we pivot to
-              cold-spark and drone shows that carry no open-flame risk.
+              cold-spark and close-proximity effects that carry no open-flame risk.
             </p>
             <p className="disclaimer">
               Concept copy — final site verifies all licensing, insurance figures, and burn-ban

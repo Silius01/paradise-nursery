@@ -1,5 +1,13 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
+import { YouTube, Facebook, XTwitter } from './Icons'
+
+// href null = account not live yet (shown but not linked)
+const SOCIAL = [
+  { name: 'YouTube', href: 'https://www.youtube.com/@USGPyrotechnics', Icon: YouTube },
+  { name: 'Facebook', href: null, Icon: Facebook },
+  { name: 'X', href: null, Icon: XTwitter },
+]
 
 export default function Footer() {
   return (
@@ -8,9 +16,22 @@ export default function Footer() {
         <div>
           <img src={logo} alt="USG Pyrotechnics and FX" />
           <p style={{ fontSize: '13.5px', maxWidth: '280px' }}>
-            Licensed aerial, close-proximity, cold-spark, and drone displays across Central Texas.
-            Manor · Austin · Hill Country.
+            Licensed aerial, close-proximity, and cold-spark displays across Central Texas. Manor ·
+            Austin · Hill Country.
           </p>
+          <div className="socials">
+            {SOCIAL.map(({ name, href, Icon }) =>
+              href ? (
+                <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name}>
+                  <Icon />
+                </a>
+              ) : (
+                <span key={name} className="soon" title={`${name} — coming soon`} aria-label={`${name} coming soon`}>
+                  <Icon />
+                </span>
+              ),
+            )}
+          </div>
         </div>
         <div>
           <h4>Shows</h4>
@@ -18,7 +39,7 @@ export default function Footer() {
           <Link to="/services">Municipal</Link>
           <Link to="/services">Corporate</Link>
           <Link to="/services">Cold Spark</Link>
-          <Link to="/services">Drone Shows</Link>
+          <Link to="/services">Pyromusicals</Link>
         </div>
         <div>
           <h4>Company</h4>

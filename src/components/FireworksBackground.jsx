@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { PALETTES, hexToRgb } from '../data/shows'
 import useReducedMotion from '../hooks/useReducedMotion'
+import * as audio from '../audio/fireworksAudio'
 
 export default function FireworksBackground() {
   const canvasRef = useRef(null)
@@ -176,8 +177,8 @@ export default function FireworksBackground() {
         launch(null, keys[Math.floor(Math.random() * keys.length)])
         lastLaunch = ts
       }
-      // occasionally spell out USG
-      if (ts - lastUSG > 15000 + Math.random() * 9000) {
+      // spell out USG roughly every 15 seconds
+      if (ts - lastUSG > 15000 + Math.random() * 2000) {
         fireUSG()
         lastUSG = ts
       }
@@ -200,6 +201,7 @@ export default function FireworksBackground() {
         if (sh.y <= sh.ty || sh.vy >= 0) {
           if (sh.type === 'letter') letterBurst(sh.x, sh.y, sh.letter, sh.pal)
           else burst(sh.x, sh.y, sh.pal, sh.type, sh.scale)
+          audio.playBurst(sh.type, sh.scale || 1)
           shells.splice(j, 1)
         }
       }
