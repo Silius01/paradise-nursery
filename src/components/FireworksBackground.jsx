@@ -74,11 +74,12 @@ export default function FireworksBackground() {
     }
     // Spell "USG" across the sky — U left, S centre, G right, bursting together.
     const fireUSG = () => {
-      // burst low, in the open sky below the hero logo/content
-      const ty = 0.74 * H
+      // burst up in the sky with the rest of the show; spread wide so the U and
+      // G clear the hero logo on the home page
+      const ty = 0.24 * H
       const g = 0.12 * DPR
       const vy = -Math.sqrt(2 * g * Math.max(1, H - ty)) * 1.04
-      ;[['U', 0.31], ['S', 0.5], ['G', 0.69]].forEach(([ch, fx]) => {
+      ;[['U', 0.22], ['S', 0.5], ['G', 0.78]].forEach(([ch, fx]) => {
         shells.push({ x: fx * W, y: H, vy, ty, pal: PALETTES.white, type: 'letter', letter: ch })
       })
     }
